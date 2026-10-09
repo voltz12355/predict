@@ -130,6 +130,8 @@
   .modal-h { font-size:13px; font-weight:900; letter-spacing:3px; margin-bottom:18px; }
   .cfg-save { display:flex; gap:8px; margin-bottom:14px; }
   .cfg-in { flex:1; background:var(--panel2); border:1px solid var(--line2); color:var(--txt); padding:11px; border-radius:4px; font-size:12px; outline:none; }
+  .cfg-edit { flex:1; margin-right:8px; }
+  .mini-btn.edit { color:#8ab4ff; border-color:#3d4a66; }
   .cfg-in:focus { border-color:#48526a; }
   .cfg-list { max-height:34vh; overflow-y:auto; margin-bottom:14px; }
   .cfg-item { display:flex; align-items:center; justify-content:space-between; padding:10px 4px; border-bottom:1px solid var(--line); font-size:12px; color:var(--dim); }
@@ -1174,6 +1176,7 @@ function renderCfgs() {
   el.innerHTML = list.map((c, i) =>
     '<div class="cfg-item"><b>' + esc(c.name) + '</b><span class="acts">' +
     '<span class="mini-btn" onclick="loadCfg(' + i + ')">LOAD</span>' +
+    '<span class="mini-btn edit" onclick="editCfg(' + i + ')">EDIT</span>' +
     '<span class="mini-btn del" onclick="delCfg(' + i + ')">DELETE</span>' +
     "</span></div>"
   ).join("");
@@ -1205,6 +1208,38 @@ function delCfg(i) {
   cfgSaveList(list);
   renderCfgs();
   toast("Config deleted.");
+}
+
+function editCfg(i) {
+  const c = cfgStore()[i];
+  const row = document.getElementById("cfgList").children[i];
+  if (!c || !row) return;
+  row.innerHTML = '<input class="cfg-in cfg-edit" id="cfgEditIn" spellcheck="false">' +
+    '<span class="acts">' +
+    '<span class="mini-btn" onclick="saveCfgName(' + i + ')">SAVE</span>' +
+    '<span class="mini-btn del" onclick="renderCfgs()">CANCEL</span>' +
+    '</span>';
+  const inp = document.getElementById("cfgEditIn");
+  inp.value = c.name;
+  inp.focus();
+  inp.select();
+  inp.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); saveCfgName(i); }
+    else if (e.key === "Escape") { e.preventDefault(); renderCfgs(); }
+  });
+}
+function saveCfgName(i) {
+  const inp = document.getElementById("cfgEditIn");
+  if (!inp) return;
+  const name = inp.value.trim();
+  if (!name) { toast("Enter a config name"); return; }
+  const list = cfgStore();
+  if (list.some((c, j) => j !== i && c.name === name)) { toast('Config "' + name + '" already exists'); return; }
+  if (!list[i]) { renderCfgs(); return; }
+  list[i].name = name;
+  cfgSaveList(list);
+  renderCfgs();
+  toast("Renamed to " + name);
 }
 
 function copyText(t, msg) {
