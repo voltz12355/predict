@@ -69,6 +69,7 @@
   .btn { background:var(--btn); border:1px solid var(--line2); color:#dfe3ea; padding:13px 20px; border-radius:4px; cursor:pointer; font-size:11px; font-weight:900; letter-spacing:2.5px; transition:all .15s; }
   .btn:hover { border-color:#48526a; color:#fff; }
   .bi { margin-right:8px; font-style:normal; font-weight:900; }
+  .btn.small { padding:7px 13px; font-size:9px; letter-spacing:1.5px; }
   .cfg-foot { display:flex; gap:10px; margin-top:16px; }
   .cfg-foot .btn { flex:1; width:auto; margin-top:0; }
   .btn.wide { width:100%; margin-top:18px; }
@@ -218,7 +219,7 @@
 <main class="page" id="page-dash" style="display:flex; flex-direction:column; overflow:hidden;">
   <div class="dash-h">
     <div>
-      <div class="dh-title"><span id="dhTitleName">PREDICT</span> <span class="badge">SCRIPT</span></div>
+      <div class="dh-title"><span id="dhTitleName">PREDICT</span> <span class="badge">SCRIPT</span> <button class="btn red small" onclick="unloadConfig()" title="unload the loaded config &#8212; back to normal settings">UNLOAD</button></div>
       <div class="dh-sub"><span class="led" id="led"></span><span id="b2-txt">NOT LOADED</span></div>
     </div>
     <div class="dh-actions">
@@ -1167,7 +1168,7 @@ function confirmApply() {
   closeApplyModal();
   doApply();
 }
-async function doApply() {
+async function doApply(msg) {
   let cfg;
   try {
     cfg = normalizeCfg(parseConfig(ed.value));
@@ -1188,13 +1189,22 @@ async function doApply() {
   } catch (e) {}
   const ok = await writeState();
   if (ok) { if (pendingCfgName) setCurCfgName(pendingCfgName); setStatus(cfgStatusText(), true); updateTitle(); }
-  toast(ok ? "Config applied." : "Write failed — press LINK FOLDER, then APPLY");
+  toast(ok ? (msg || "Config applied.") : "Write failed — press LINK FOLDER, then APPLY");
+  return ok;
 }
 
 function resetCfg() {
   pendingCfgName = "DEFAULTS";
   loadIntoEditor(defaultCfg(), "DEFAULTS LOADED — PRESS APPLY");
   toast("Defaults loaded — press APPLY");
+}
+function unloadConfig() {
+  pendingCfgName = null;
+  setCurCfgName("");
+  loadIntoEditor(defaultCfg(), "CONFIG UNLOADED");
+  doApply("Config unloaded — normal settings.").then(ok => {
+    if (ok) setStatus("NORMAL SETTINGS", true);
+  });
 }
 
 async function unloadScript() {
