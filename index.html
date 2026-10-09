@@ -242,6 +242,7 @@
       <button class="ec-p" data-hex="#00ff00">GREEN</button>
       <button class="ec-p" data-hex="#ff69b4">PINK</button>
     </span>
+    <label class="ec-lab" title="char skin changer: copy this player's skin">CHAR <input type="text" id="ecChar" class="cfg-in" style="width:130px" placeholder="username" spellcheck="false" autocomplete="off"></label>
   </div>
 
   <div class="ed-wrap">
@@ -896,6 +897,7 @@ function refreshEditor() {
   hlTimer = setTimeout(() => { hl.innerHTML = highlight(ed.value); }, 40);
   if (findOpen) runFind(false, false);
   syncEspPickers();
+  syncCharPicker();
 }
 
 ed.addEventListener("input", refreshEditor);
@@ -957,6 +959,33 @@ document.querySelectorAll(".ec-p").forEach(function (b) {
   });
 });
 syncEspPickers();
+
+function charKeyPos() {
+  const t = ed.value;
+  const i = t.indexOf('["Char"] = {');
+  if (i < 0) return null;
+  const re = /\["Username"\]\s*=\s*"([^"]*)"/;
+  const m = re.exec(t.slice(i));
+  if (!m) return null;
+  return { start: i + m.index, end: i + m.index + m[0].length, val: m[1] };
+}
+function setCharName(v) {
+  const p = charKeyPos();
+  if (!p) return;
+  const safe = String(v).replace(/["\\]/g, "");
+  ed.value = ed.value.slice(0, p.start) + '["Username"] = "' + safe + '"' + ed.value.slice(p.end);
+  refreshEditor();
+}
+function syncCharPicker() {
+  try {
+    const p = charKeyPos();
+    const el = document.getElementById("ecChar");
+    if (p && el && el.value !== p.val) el.value = p.val;
+  } catch (e) {}
+}
+document.getElementById("ecChar").addEventListener("input", function () { setCharName(this.value); });
+document.getElementById("ecChar").addEventListener("change", function () { setCharName(this.value); applyCfg(); });
+syncCharPicker();
 
 function setStatus(text, on) {
   document.getElementById("b2-txt").textContent = text;
