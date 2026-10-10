@@ -226,7 +226,57 @@ main.page{ margin-left:300px; }
 ::-webkit-scrollbar-thumb{ background:#2e2023; border-radius:6px; }
 ::-webkit-scrollbar-thumb:hover{ background:#4a3338; }
 ::-webkit-scrollbar-track{ background:#0b090a; }
-</style>
+</style><style>
+:root{--red:#ff2d3f;--red2:#ff5c68;--rline:#2a1013}
+.pg-head{padding:4px 0 14px}
+.pg-over{font-size:10px;letter-spacing:.22em;color:var(--red2);text-transform:uppercase;font-weight:800;margin-bottom:8px}
+.pg-title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.pg-title{font-size:30px;font-weight:900;letter-spacing:-.5px;color:#fff}
+.pg-sub{color:#8d8388;font-size:13px;margin-top:4px}
+.pg-hr{border:0;border-top:1px solid var(--rline);margin:14px 0 18px}
+.hero{min-height:58vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.hero-logo{font-size:64px;font-weight:900;letter-spacing:-2px;background:linear-gradient(180deg,#fff,#ff5c68 70%,#ff2d3f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:12px;letter-spacing:.34em;color:#8d8388}
+.hero-status{display:flex;align-items:center;gap:8px;font-size:12px;color:#8d8388}
+.dot.g{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 8px #3ddc84;display:inline-block}
+.dash-grid{display:grid;grid-template-columns:1fr;gap:18px}
+.ctrl-wrap{display:flex;gap:16px;align-items:flex-start}
+.ctrl-card.mods{width:210px;flex:none;padding:14px}
+.ctrl-lab{font-size:10px;letter-spacing:.2em;color:#8d8388;margin-bottom:10px}
+.mod{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:600;color:#c9c2c5;cursor:pointer;border:1px solid transparent;transition:.15s;margin-bottom:4px}
+.mod:hover{background:#140b0d;color:#fff}
+.mod.active{background:linear-gradient(90deg,rgba(255,45,63,.18),rgba(255,45,63,.05));border-color:rgba(255,45,63,.4);color:#ff5c68}
+.mod-k{width:20px;height:20px;border-radius:6px;background:#1b1114;color:#ff5c68;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.mod.active .mod-k{background:var(--red);color:#fff}
+.ctrl-main{flex:1;min-width:0}
+.ctrl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.ctrl-card{padding:16px}
+.cc-h{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.cc-t{font-size:14px;font-weight:800;color:#fff}
+.cc-s{font-size:11px;color:#8d8388}
+.cc-b{background:#1b1114;border:1px solid var(--rline);color:#ff5c68;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px}
+.cc-note{font-size:11px;color:#8d8388;margin-top:8px;line-height:1.5}
+.ctl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.ctl:last-child{border-bottom:0}
+.ctl-t{font-size:13px;font-weight:600;color:#e7dfe2}
+.ctl-s{font-size:11px;color:#8d8388;margin-top:2px}
+.ctl-r{display:flex;align-items:center;gap:10px}
+.ctl-val{font-size:12px;font-weight:700;color:#ff5c68;min-width:44px;text-align:right}
+.ctl-sel{background:#12090b;border:1px solid var(--rline);color:#e7dfe2;font-size:12px;border-radius:8px;padding:7px 10px;outline:none}
+.ctl-sel:focus{border-color:var(--red)}
+.ctl-in{background:#12090b;border:1px solid var(--rline);color:#e7dfe2;font-size:12px;border-radius:8px;padding:7px 10px;width:110px;outline:none;text-align:right}
+.ctl-in:focus{border-color:var(--red)}
+.sw{position:relative;width:40px;height:22px;flex:none}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:2}
+.kn{position:absolute;inset:0;background:#241418;border-radius:99px;transition:.18s;border:1px solid var(--rline)}
+.kn:before{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#7d7378;transition:.18s}
+.sw input:checked + .kn{background:var(--red);border-color:var(--red)}
+.sw input:checked + .kn:before{transform:translateX(18px);background:#fff}
+input[type=range].rng{-webkit-appearance:none;appearance:none;width:130px;height:4px;border-radius:99px;background:#241418;outline:none}
+input[type=range].rng::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--red);border:2px solid #fff;cursor:pointer}
+.live-pill{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;color:#3ddc84;background:rgba(61,220,132,.08);border:1px solid rgba(61,220,132,.3);padding:6px 12px;border-radius:99px}
+.empty{color:#8d8388;font-size:14px;padding:40px 0;text-align:center;border:1px dashed var(--rline);border-radius:14px}
+@media (max-width:980px){.ctrl-wrap{flex-direction:column}.ctrl-card.mods{width:100%}}</style>
 </head>
 <body>
 
@@ -239,7 +289,11 @@ main.page{ margin-left:300px; }
   <nav class="sb-nav">
     <div class="sb-item" id="sbitem-home" onclick="showTab('home')">Home</div>
     <div class="sb-item active" id="sbitem-dash" onclick="showTab('dash')">Dashboard</div>
-    <div class="sb-item" onclick="toggleCfgs()">Configs</div>
+    <div class="sb-item" id="sbitem-control" onclick="showTab('control')">Control</div>
+    <div class="sb-item" id="sbitem-media" onclick="showTab('media')">Media</div>
+    <div class="sb-item" id="sbitem-config" onclick="showTab('config')">Config</div>
+    <div class="sb-item" id="sbitem-bugs" onclick="showTab('bugs')">Bugs</div>
+    <div class="sb-item" id="sbitem-updates" onclick="showTab('updates')">Updates</div>
   </nav>
   <div class="sb-bottom">
     <div class="sb-user">
@@ -262,13 +316,38 @@ main.page{ margin-left:300px; }
   </div>
   <div class="icons">
     <svg viewBox="0 0 24 24" onclick="toast('No notifications')"><path d="M6 9a6 6 0 1112 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 004 0"/></svg>
-    <svg viewBox="0 0 24 24" onclick="toast('Edit the table on the Dashboard tab')"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 00-1.7-1L14.5 3h-4l-.4 2.6a7 7 0 00-1.7 1l-2.3-1-2 3.4L6 11a7 7 0 000 2l-2 1.5 2 3.4 2.3-1a7 7 0 001.7 1l.4 2.6h4l.4-2.6a7 7 0 001.7-1l2.3 1 2-3.4-2-1.5c.1-.3.1-.7.1-1z"/></svg>
+    <svg viewBox="0 0 24 24" onclick="toast('Edit values on the Control tab')"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 00-1.7-1L14.5 3h-4l-.4 2.6a7 7 0 00-1.7 1l-2.3-1-2 3.4L6 11a7 7 0 000 2l-2 1.5 2 3.4 2.3-1a7 7 0 001.7 1l.4 2.6h4l.4-2.6a7 7 0 001.7-1l2.3 1 2-3.4-2-1.5c.1-.3.1-.7.1-1z"/></svg>
     <svg viewBox="0 0 24 24" onclick="toast('Session secured')"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
   </div>
 </div>
 
 <!-- ══ HOME ══ -->
 <main class="page hidden" id="page-home">
+  <div class="hero">
+    <div class="hero-logo">PREDICT</div>
+    <div class="hero-sub">EXTERNAL SCRIPT DASHBOARD</div>
+    <div class="hero-status"><span class="dot g"></span> LIVE &middot; BRIDGE READY</div>
+    <button class="btn red" onclick="showTab('dash')">OPEN DASHBOARD</button>
+  </div>
+</main>
+<!-- ══ DASHBOARD ══ -->
+<main class="page" id="page-dash">
+  <div class="pg-head">
+    <div class="pg-over">PREDICT &middot; LIVE SYNC</div>
+    <div class="pg-title-row">
+      <div>
+        <div class="pg-title">Dashboard</div>
+        <div class="pg-sub">Verify, grab the script, bridge your workspace.</div>
+      </div>
+      <div class="pg-meta">
+        <span><b>Product:</b> External</span>
+        <span><b>Status:</b> <i style="font-style:normal;color:#3ddc84;font-weight:700">Up</i></span>
+        <span><b>Version:</b> Beta</span>
+      </div>
+    </div>
+    <hr class="pg-hr">
+  </div>
+  <div class="dash-grid">
   <div class="verify">
     <div class="bars">
       <div class="bar anim"></div><div class="bar anim"></div><div class="bar anim"></div>
@@ -301,13 +380,124 @@ main.page{ margin-left:300px; }
       <button class="btn wide" onclick="copyPath()">COPY SCRIPT PATH</button>
     </div>
   </div>
+  </div>
 </main>
-
-<!-- ══ DASHBOARD ══ -->
-<main class="page" id="page-dash" style="display:flex; flex-direction:column; overflow:hidden;">
+<!-- ══ CONTROL ══ -->
+<main class="page hidden" id="page-control">
+  <div class="pg-head">
+    <div class="pg-over">PREDICT &middot; LIVE SYNC</div>
+    <div class="pg-title-row">
+      <div>
+        <div class="pg-title">Control</div>
+        <div class="pg-sub">Toggle features and tune values &mdash; changes write to the config instantly.</div>
+      </div>
+      <div class="live-pill"><span class="dot g"></span>LIVE SYNC</div>
+    </div>
+    <hr class="pg-hr">
+  </div>
+  <div class="ctrl-wrap">
+    <div class="ctrl-card mods">
+      <div class="ctrl-lab">MODULES</div>
+      <div class="mod active" id="mod-legit" onclick="showModule('legit')"><span class="mod-k">L</span>Legit</div>
+      <div class="mod" id="mod-aim" onclick="showModule('aim')"><span class="mod-k">A</span>Aim</div>
+      <div class="mod" id="mod-visuals" onclick="showModule('visuals')"><span class="mod-k">V</span>Visuals</div>
+      <div class="mod" id="mod-misc" onclick="showModule('misc')"><span class="mod-k">M</span>Misc</div>
+      <div class="mod" id="mod-settings" onclick="showModule('settings')"><span class="mod-k">S</span>Settings</div>
+      <div class="mod" id="mod-configs" onclick="showModule('configs')"><span class="mod-k">C</span>Configs</div>
+    </div>
+    <div class="ctrl-main">
+  <div class="ctrl-grid" id="ctrl-legit">
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Silent Aim</div><div class="cc-s">Core targeting</div></div><span class="cc-b">4</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Silent Aim</div><div class="ctl-s">Core silent aim toggle</div></div><label class="sw"><input type="checkbox" data-cpath="Combat.Silent.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Hitpart</div><div class="ctl-s">Where shots land</div></div><select class="ctl-sel" data-cpath="Combat.Silent.HitPart"><option>Head</option><option>HumanoidRootPart</option><option>UpperTorso</option></select></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Distance</div><div class="ctl-s">Max lock distance</div></div><div class="ctl-r"><span class="ctl-val" id="rl1-lbl">-</span><input type="range" class="rng" id="rl1" data-cpath="Combat.Silent.Distance" min="50" max="600" step="5" data-unit="st"></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Hit Chance</div><div class="ctl-s">Shot reliability</div></div><div class="ctl-r"><span class="ctl-val" id="rl2-lbl">-</span><input type="range" class="rng" id="rl2" data-cpath="Combat.Silent.Hit Chance" min="0" max="100" step="1" data-unit="%"></div></div>
+  </div>
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Accuracy</div><div class="cc-s">Shot feel</div></div><span class="cc-b">5</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Show FOV</div><div class="ctl-s">FOV circle on screen</div></div><label class="sw"><input type="checkbox" data-cpath="FOV.Silent.Visible"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">FOV Size</div><div class="ctl-s">Circle radius</div></div><div class="ctl-r"><span class="ctl-val" id="rl3-lbl">-</span><input type="range" class="rng" id="rl3" data-cpath="FOV.Silent.Width" min="30" max="400" step="5" data-unit="px"></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Prediction</div><div class="ctl-s">Lead moving targets</div></div><label class="sw"><input type="checkbox" data-cpath="Combat.Silent.Prediction.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Prediction X</div><div class="ctl-s">Lead amount</div></div><div class="ctl-r"><span class="ctl-val" id="rl4-lbl">-</span><input type="range" class="rng" id="rl4" data-cpath="Combat.Silent.Prediction.X" min="0" max="0.5" step="0.01" data-unit=""></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Spread</div><div class="ctl-s">Jitter spread (keep off for normal shots)</div></div><label class="sw"><input type="checkbox" data-cpath="Gun.Spread.Enabled"><span class="kn"></span></label></div>
+  </div>
+  </div>
+  <div class="ctrl-grid hidden" id="ctrl-aim">
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Camlock</div><div class="cc-s">Camera lock</div></div><span class="cc-b">5</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Camlock</div><div class="ctl-s">Camera aim toggle</div></div><label class="sw"><input type="checkbox" data-cpath="Combat.Camlock.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Smoothing</div><div class="ctl-s">Lower = snappier</div></div><div class="ctl-r"><span class="ctl-val" id="rl5-lbl">-</span><input type="range" class="rng" id="rl5" data-cpath="Combat.Camlock.Smoothing" min="0" max="1" step="0.001" data-unit=""></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Visible Check</div><div class="ctl-s">Only lock when visible</div></div><label class="sw"><input type="checkbox" data-cpath="Combat.Camlock.Visible Check"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Show FOV</div><div class="ctl-s">Camlock FOV circle</div></div><label class="sw"><input type="checkbox" data-cpath="FOV.Camlock.Visible"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">FOV Size</div><div class="ctl-s">Circle radius</div></div><div class="ctl-r"><span class="ctl-val" id="rl6-lbl">-</span><input type="range" class="rng" id="rl6" data-cpath="FOV.Camlock.Width" min="30" max="400" step="5" data-unit="px"></div></div>
+  </div>
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Triggerbot</div><div class="cc-s">Auto fire</div></div><span class="cc-b">3</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Triggerbot</div><div class="ctl-s">Fire on crosshair</div></div><label class="sw"><input type="checkbox" data-cpath="Combat.Triggerbot.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Delay</div><div class="ctl-s">Shot delay</div></div><div class="ctl-r"><span class="ctl-val" id="rl7-lbl">-</span><input type="range" class="rng" id="rl7" data-cpath="Combat.Triggerbot.Delay" min="0" max="500" step="10" data-unit="ms"></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Show FOV</div><div class="ctl-s">Triggerbot FOV circle</div></div><label class="sw"><input type="checkbox" data-cpath="FOV.Triggerbot.Visible"><span class="kn"></span></label></div>
+  </div>
+  </div>
+  <div class="ctrl-grid hidden" id="ctrl-visuals">
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">ESP</div><div class="cc-s">Player overlay</div></div><span class="cc-b">5</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">ESP</div><div class="ctl-s">Master ESP toggle</div></div><label class="sw"><input type="checkbox" data-cpath="Visuals.ESP.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Distance</div><div class="ctl-s">Render range</div></div><div class="ctl-r"><span class="ctl-val" id="rl8-lbl">-</span><input type="range" class="rng" id="rl8" data-cpath="Visuals.ESP.Distance" min="100" max="2000" step="50" data-unit="st"></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Size</div><div class="ctl-s">Text size</div></div><div class="ctl-r"><span class="ctl-val" id="rl9-lbl">-</span><input type="range" class="rng" id="rl9" data-cpath="Visuals.ESP.Size" min="6" max="30" step="1" data-unit="px"></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Names</div><div class="ctl-s">Show names</div></div><label class="sw"><input type="checkbox" data-cpath="Visuals.ESP.Names"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Boxes</div><div class="ctl-s">Show boxes</div></div><label class="sw"><input type="checkbox" data-cpath="Visuals.ESP.Box"><span class="kn"></span></label></div>
+  </div>
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Details</div><div class="cc-s">Extra ESP lines</div></div><span class="cc-b">3</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Tracers</div><div class="ctl-s">Line to player</div></div><label class="sw"><input type="checkbox" data-cpath="Visuals.ESP.Tracers"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Health</div><div class="ctl-s">Health bar</div></div><label class="sw"><input type="checkbox" data-cpath="Visuals.ESP.Health"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Chams</div><div class="ctl-s">Glow through walls</div></div><label class="sw"><input type="checkbox" data-cpath="Visuals.ESP.Chams"><span class="kn"></span></label></div>
+  </div>
+  </div>
+  <div class="ctrl-grid hidden" id="ctrl-misc">
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Da Hood</div><div class="cc-s">Weapon perks</div></div><span class="cc-b">5</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Wall Bang</div><div class="ctl-s">Shoot through walls</div></div><label class="sw"><input type="checkbox" data-cpath="Gun.Wall Bang.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Range Enhancer</div><div class="ctl-s">Extra bullet range</div></div><label class="sw"><input type="checkbox" data-cpath="Gun.Range Enhancer.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">No Recoil</div><div class="ctl-s">Steady aim</div></div><label class="sw"><input type="checkbox" data-cpath="Da Hood.No Recoil"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Hitbox Expander</div><div class="ctl-s">Bigger targets</div></div><label class="sw"><input type="checkbox" data-cpath="Gun.Hitbox Expander.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Hitbox Size</div><div class="ctl-s">Expander size</div></div><div class="ctl-r"><span class="ctl-val" id="rl10-lbl">-</span><input type="range" class="rng" id="rl10" data-cpath="Gun.Hitbox Expander.Size" min="5" max="40" step="1" data-unit="px"></div></div>
+  </div>
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Movement</div><div class="cc-s">Character mods</div></div><span class="cc-b">4</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Speed Override</div><div class="ctl-s">Custom walkspeed</div></div><label class="sw"><input type="checkbox" data-cpath="Character.Speed Override.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Super Jump</div><div class="ctl-s">High jumps</div></div><label class="sw"><input type="checkbox" data-cpath="Character.Super Jump.Enabled"><span class="kn"></span></label></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Jump Power</div><div class="ctl-s">Jump force</div></div><div class="ctl-r"><span class="ctl-val" id="rl11-lbl">-</span><input type="range" class="rng" id="rl11" data-cpath="Character.Super Jump.Power" min="50" max="400" step="10" data-unit="jp"></div></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Fly</div><div class="ctl-s">Flight mode</div></div><label class="sw"><input type="checkbox" data-cpath="Character.Fly.Enabled"><span class="kn"></span></label></div>
+  </div>
+  </div>
+  <div class="ctrl-grid hidden" id="ctrl-settings">
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Keybinds</div><div class="cc-s">Session hotkeys (config-driven)</div></div><span class="cc-b">5</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Target Lock</div><div class="ctl-s">Silent aim lock key</div></div><input class="ctl-in" type="text" data-cpath="Keybinds.Target"></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Camlock</div><div class="ctl-s">Camera lock key</div></div><input class="ctl-in" type="text" data-cpath="Keybinds.Combat.Camlock"></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Triggerbot</div><div class="ctl-s">Triggerbot key</div></div><input class="ctl-in" type="text" data-cpath="Keybinds.Combat.Triggerbot"></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">ESP</div><div class="ctl-s">ESP key</div></div><input class="ctl-in" type="text" data-cpath="Keybinds.Visuals.ESP"></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Wall Bang</div><div class="ctl-s">Wall bang key</div></div><input class="ctl-in" type="text" data-cpath="Keybinds.Gun.Wall Bang"></div>
+  </div>
+    <div class="cc-note">Changes write straight to the config file. Editor edits still go through APPLY.</div>
+  </div>
+  <div class="ctrl-grid hidden" id="ctrl-configs">
+  <div class="ctrl-card">
+    <div class="cc-h"><div><div class="cc-t">Configs</div><div class="cc-s">Presets and raw editing</div></div><span class="cc-b">3</span></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Presets</div><div class="ctl-s">Load / save config presets</div></div><button class="btn" onclick="toggleCfgs()">OPEN</button></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Editor</div><div class="ctl-s">Raw config text editor</div></div><button class="btn" onclick="showTab('config')">OPEN</button></div>
+    <div class="ctl"><div class="ctl-l"><div class="ctl-t">Apply</div><div class="ctl-s">Confirm pending editor edits</div></div><button class="btn red" onclick="confirmApply()">APPLY</button></div>
+  </div>
+  </div>    </div>
+  </div>
+</main>
+<!-- ══ CONFIG ══ -->
+<main class="page hidden" id="page-config" style="display:flex; flex-direction:column; overflow:hidden;">
   <div class="dash-h">
     <div>
-      <div class="pg-over">PREDICT &middot; LIVE SYNC</div>
+      <div class="pg-over">CONFIG &middot; LIVE SYNC</div>
       <div class="dh-title"><span id="dhTitleName">PREDICT</span> <span class="badge">SCRIPT</span> <button class="btn red small" onclick="unloadConfig()" title="unload the loaded config &#8212; back to normal settings">UNLOAD</button></div>
       <div class="dh-sub"><span class="led" id="led"></span><span id="b2-txt">NOT LOADED</span></div>
     </div>
@@ -363,6 +553,24 @@ main.page{ margin-left:300px; }
       </div>
     </div>
   </div><!-- /dash-body -->
+</main>
+
+<!-- ══ MEDIA ══ -->
+<main class="page hidden" id="page-media">
+  <div class="pg-head"><div class="pg-over">PREDICT</div><div class="pg-title">Media</div><hr class="pg-hr"></div>
+  <div class="empty">No media posts yet.</div>
+</main>
+
+<!-- ══ BUGS ══ -->
+<main class="page hidden" id="page-bugs">
+  <div class="pg-head"><div class="pg-over">PREDICT</div><div class="pg-title">Bugs</div><hr class="pg-hr"></div>
+  <div class="empty">No bugs posts yet.</div>
+</main>
+
+<!-- ══ UPDATES ══ -->
+<main class="page hidden" id="page-updates">
+  <div class="pg-head"><div class="pg-over">PREDICT</div><div class="pg-title">Updates</div><hr class="pg-hr"></div>
+  <div class="empty">No updates posts yet.</div>
 </main>
 
 <!-- ══ CONFIGS MODAL ══ -->
@@ -1084,6 +1292,7 @@ function loadIntoEditor(cfg, label) {
   S = cfg;
   ed.value = generateText(cfg);
   refreshEditor();
+  if (typeof syncControls === "function") syncControls();
   setStatus(label, !!label);
   updateTitle();
 }
@@ -1557,13 +1766,18 @@ function togKey() {
 function cpyKey() { copyText(document.getElementById("lkey").value, "Key copied to clipboard"); }
 
 function showTab(name) {
-  document.getElementById("page-home").classList.toggle("hidden", name !== "home");
-  document.getElementById("page-dash").classList.toggle("hidden", name !== "dash");
-  document.getElementById("tabbtn-home").className = "tab" + (name === "home" ? " active" : "");
-  document.getElementById("tabbtn-dash").className = "tab" + (name === "dash" ? " active" : "");
-  var sbh = document.getElementById("sbitem-home"), sbd = document.getElementById("sbitem-dash");
-  if (sbh) sbh.classList.toggle("active", name === "home");
-  if (sbd) sbd.classList.toggle("active", name === "dash");
+  var pages = ["home", "dash", "control", "media", "config", "bugs", "updates"];
+  for (var i = 0; i < pages.length; i++) {
+    var p = document.getElementById("page-" + pages[i]);
+    if (p) p.classList.toggle("hidden", pages[i] !== name);
+    var s = document.getElementById("sbitem-" + pages[i]);
+    if (s) s.classList.toggle("active", pages[i] === name);
+  }
+  var t1 = document.getElementById("tabbtn-home"), t2 = document.getElementById("tabbtn-dash");
+  if (t1) t1.className = "tab" + (name === "home" ? " active" : "");
+  if (t2) t2.className = "tab" + (name === "dash" ? " active" : "");
+  if (name === "config") { try { refreshEditor(); } catch (e) {} }
+  if (typeof syncControls === "function") { try { syncControls(); } catch (e) {} }
 }
 setInterval(function () {
   try {
@@ -1572,6 +1786,69 @@ setInterval(function () {
     if (t && s && t.textContent) s.textContent = t.textContent;
   } catch (e) {}
 }, 1000);
+
+/* ══════════════ CONTROL PAGE WIDGETS ══════════════ */
+function cfgWalk(o, path) {
+  var p = String(path).split("."), c = o;
+  for (var i = 0; i < p.length; i++) { if (c == null || typeof c !== "object") return null; c = c[p[i]]; }
+  return c;
+}
+function cfgSetVal(path, val) {
+  try {
+    var cfg = normalizeCfg(parseConfig(ed.value));
+    var p = String(path).split("."), o = cfg;
+    for (var i = 0; i < p.length - 1; i++) {
+      if (o[p[i]] == null || typeof o[p[i]] !== "object") o[p[i]] = {};
+      o = o[p[i]];
+    }
+    o[p[p.length - 1]] = val;
+    S = cfg;
+    ed.value = generateText(cfg);
+    refreshEditor();
+    writeState();
+    return true;
+  } catch (e) { toast("Set failed: " + (e && e.message ? e.message : e)); return false; }
+}
+function cfgGetVal(path) {
+  try { return cfgWalk(normalizeCfg(parseConfig(ed.value)), path); } catch (e) { return null; }
+}
+function syncControls() {
+  var els = document.querySelectorAll("[data-cpath]");
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i], v = cfgGetVal(el.getAttribute("data-cpath"));
+    if (el.type === "checkbox") el.checked = (v === true);
+    else if (el.type === "range") {
+      if (v != null && v !== "") el.value = v;
+      var l = document.getElementById(el.id + "-lbl");
+      if (l) l.textContent = el.value + (el.getAttribute("data-unit") || "");
+    }
+    else if (el.tagName === "SELECT") { if (v != null && v !== "") el.value = v; }
+    else if (el.tagName === "INPUT") { if (v != null) el.value = v; }
+  }
+}
+function showModule(name) {
+  var mods = ["legit", "aim", "visuals", "misc", "settings", "configs"];
+  for (var i = 0; i < mods.length; i++) {
+    var g = document.getElementById("ctrl-" + mods[i]);
+    if (g) g.classList.toggle("hidden", mods[i] !== name);
+    var b = document.getElementById("mod-" + mods[i]);
+    if (b) b.classList.toggle("active", mods[i] === name);
+  }
+}
+document.addEventListener("change", function (e) {
+  var el = e.target;
+  if (el && el.hasAttribute && el.hasAttribute("data-cpath")) {
+    var v = el.type === "checkbox" ? el.checked : (el.type === "range" ? Number(el.value) : el.value);
+    cfgSetVal(el.getAttribute("data-cpath"), v);
+  }
+});
+document.addEventListener("input", function (e) {
+  var el = e.target;
+  if (el && el.type === "range" && el.hasAttribute && el.hasAttribute("data-cpath")) {
+    var l = document.getElementById(el.id + "-lbl");
+    if (l) l.textContent = el.value + (el.getAttribute("data-unit") || "");
+  }
+});
 
 /* ══════════════ VERIFY THEATER ══════════════ */
 function startVerify() {
