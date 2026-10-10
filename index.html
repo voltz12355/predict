@@ -161,9 +161,95 @@
   .mini-btn:hover { color:#fff; border-color:#48526a; }
   .mini-btn.del:hover { color:var(--red); border-color:#7f1d1d; }
 </style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+:root{
+  --bg:#070506; --nav:#0b0809; --panel:#130f10; --panel2:#0e0b0c;
+  --line:#241a1d; --line2:#2e2124; --txt:#f4f1f2; --dim:#9b9296; --faint:#6f6669;
+  --teal:#ff4d57; --green:#4ade80; --amber:#f59e0b; --red:#ff4d55;
+  --btn:#1a1214; --light:#f2eef0;
+}
+* { font-family:'Inter','Segoe UI',system-ui,sans-serif; }
+textarea, pre { font-family:'Consolas','Courier New',monospace; }
+input, textarea, select { color-scheme:dark; }
+body { background:radial-gradient(1000px 520px at 16% -8%, rgba(130,20,28,.22), transparent 60%), radial-gradient(760px 420px at 96% 108%, rgba(96,14,20,.16), transparent 60%), #070506; }
+.topnav, .subnav { display:none !important; }
+
+.sb{ position:fixed; left:0; top:0; bottom:0; width:300px; background:#0b0809; border-right:1px solid #1e1518; display:flex; flex-direction:column; padding:26px 20px 18px; z-index:80; }
+.sb-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.sb-logo{ font-size:29px; font-weight:900; letter-spacing:3px; color:#fff; text-shadow:2px 0 0 rgba(230,39,51,.6); }
+.sb-discord{ font-size:11px; font-weight:800; letter-spacing:.6px; padding:7px 15px; border:1px solid #34262a; border-radius:8px; background:#120e0f; color:#e9e3e5; cursor:pointer; }
+.sb-discord:hover{ background:#1d1416; border-color:#4d333a; }
+.sb-hr{ height:1px; background:#1f1719; margin:2px 0 14px; }
+.sb-nav{ display:flex; flex-direction:column; gap:6px; }
+.sb-item{ padding:13px 16px; border-radius:8px; font-weight:800; font-size:15px; color:#efe9eb; cursor:pointer; border:1px solid transparent; transition:background .12s; }
+.sb-item:hover{ background:#171012; }
+.sb-item.active{ background:linear-gradient(90deg,#46131b,#2b0d11); color:#ff3b44; border-color:#5a1921; }
+.sb-bottom{ margin-top:auto; display:flex; flex-direction:column; gap:10px; }
+.sb-user{ background:#120e0f; border:1px solid #241a1d; border-radius:10px; padding:12px 14px; }
+.sb-user-l{ font-size:9px; font-weight:800; letter-spacing:1.6px; color:var(--dim); }
+.sb-user-n{ font-size:13.5px; font-weight:800; margin-top:4px; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sb-btn{ width:100%; padding:12px; border-radius:8px; border:1px solid #312226; background:#161011; color:#efe9eb; font-size:11.5px; font-weight:800; letter-spacing:1.2px; cursor:pointer; }
+.sb-btn:hover{ background:#22181a; border-color:#4a3338; }
+.sb-btn.red{ background:#d9222c; border-color:#d9222c; color:#fff; }
+.sb-btn.red:hover{ background:#ef2f3a; border-color:#ef2f3a; }
+
+main.page{ margin-left:300px; }
+.dash-h{ padding:32px 44px 18px; }
+.dash-body{ padding:16px 44px 26px; gap:18px; }
+.ec-strip{ padding:10px 20px; }
+.pg-over{ font-size:11px; font-weight:800; letter-spacing:3.5px; color:#ff3b44; margin-bottom:8px; }
+.dh-title{ font-size:30px; font-weight:900; letter-spacing:.4px; color:#fff; }
+.dh-sub{ font-size:12px; margin-top:7px; color:var(--dim); }
+.dh-actions{ gap:10px; }
+
+.card{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:26px; }
+.card-h{ font-size:15px; font-weight:800; color:#fff; letter-spacing:.3px; margin-bottom:6px; }
+.btn{ background:var(--btn); border:1px solid var(--line2); color:#efe9eb; border-radius:8px; font-size:11px; font-weight:800; letter-spacing:1.6px; }
+.btn:hover{ background:#251a1d; border-color:#4a3338; color:#fff; }
+.btn.red{ background:#d9222c; border-color:#d9222c; color:#fff; }
+.btn.red:hover{ background:#ef2f3a; border-color:#ef2f3a; }
+.badge{ background:#2b1114; color:#ff5560; border-radius:5px; }
+.bar{ background:#e62733; }
+.hint{ letter-spacing:.6px; }
+.v-title{ font-weight:900; letter-spacing:4px; color:#fff; }
+.v-sub{ color:var(--dim); letter-spacing:3px; }
+.modal{ border-radius:14px; background:#130f10; border-color:var(--line2); }
+.am{ background:#130f10; border-color:#2a1d20; border-radius:14px; }
+.am-actions .am-btn:last-child{ background:#d9222c; border-color:#d9222c; color:#fff; }
+.ed-wrap{ background:#0b090a; border:1px solid var(--line); border-radius:10px; }
+.gutter, .mini{ background:#0e0b0c; }
+.findbar{ background:#151011; border:1px solid var(--line2); }
+.cfg-in, .lic-in{ background:#0e0b0c; border:1px solid var(--line2); border-radius:8px; color:#fff; }
+.toast{ background:#1c1214; border:1px solid #4a1a20; color:#ffd7db; border-radius:10px; }
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-thumb{ background:#2e2023; border-radius:6px; }
+::-webkit-scrollbar-thumb:hover{ background:#4a3338; }
+::-webkit-scrollbar-track{ background:#0b090a; }
+</style>
 </head>
 <body>
 
+<div class="sb">
+  <div class="sb-top">
+    <div class="sb-logo">PREDICT</div>
+    <div class="sb-discord" onclick="toast('No invite configured')">Discord</div>
+  </div>
+  <div class="sb-hr"></div>
+  <nav class="sb-nav">
+    <div class="sb-item" id="sbitem-home" onclick="showTab('home')">Home</div>
+    <div class="sb-item active" id="sbitem-dash" onclick="showTab('dash')">Dashboard</div>
+    <div class="sb-item" onclick="toggleCfgs()">Configs</div>
+  </nav>
+  <div class="sb-bottom">
+    <div class="sb-user">
+      <div class="sb-user-l">WORKSPACE</div>
+      <div class="sb-user-n" id="sbBridge">not linked</div>
+    </div>
+    <button class="sb-btn" onclick="linkFolder()">LINK FOLDER</button>
+    <button class="sb-btn red" onclick="unloadConfig()">UNLOAD</button>
+  </div>
+</div>
 <div class="topnav">
   <div class="logo">PREDICT</div>
   <div class="nav-right" onclick="toast('No invite configured')">DISCORD</div>
@@ -221,6 +307,7 @@
 <main class="page" id="page-dash" style="display:flex; flex-direction:column; overflow:hidden;">
   <div class="dash-h">
     <div>
+      <div class="pg-over">PREDICT &middot; LIVE SYNC</div>
       <div class="dh-title"><span id="dhTitleName">PREDICT</span> <span class="badge">SCRIPT</span> <button class="btn red small" onclick="unloadConfig()" title="unload the loaded config &#8212; back to normal settings">UNLOAD</button></div>
       <div class="dh-sub"><span class="led" id="led"></span><span id="b2-txt">NOT LOADED</span></div>
     </div>
@@ -1474,7 +1561,17 @@ function showTab(name) {
   document.getElementById("page-dash").classList.toggle("hidden", name !== "dash");
   document.getElementById("tabbtn-home").className = "tab" + (name === "home" ? " active" : "");
   document.getElementById("tabbtn-dash").className = "tab" + (name === "dash" ? " active" : "");
+  var sbh = document.getElementById("sbitem-home"), sbd = document.getElementById("sbitem-dash");
+  if (sbh) sbh.classList.toggle("active", name === "home");
+  if (sbd) sbd.classList.toggle("active", name === "dash");
 }
+setInterval(function () {
+  try {
+    var t = document.getElementById("b-txt");
+    var s = document.getElementById("sbBridge");
+    if (t && s && t.textContent) s.textContent = t.textContent;
+  } catch (e) {}
+}, 1000);
 
 /* ══════════════ VERIFY THEATER ══════════════ */
 function startVerify() {
