@@ -116,6 +116,12 @@
   .stack { position:relative; flex:1; min-width:0; overflow:hidden; }
   #hl, #ed { position:absolute; inset:0; font:13px/21px Consolas,'Courier New',monospace; padding:14px 18px; white-space:pre; tab-size:4; letter-spacing:0; border:none; }
   #hl { color:#d4d4d4; overflow:hidden; pointer-events:none; margin:0; }
+/* BUGFIX: the universal `*{font-family:Inter}` rule was hitting the syntax
+   highlight <span>s inside #hl, so tokens rendered in Inter while #ed (the
+   textarea you click in) rendered in Consolas. Different char widths made
+   the visible text drift from the real caret -> clicks landed off-target.
+   Force the editor font on all overlay descendants so #hl and #ed align. */
+#hl *, #ed * { font-family:'Consolas','Courier New',monospace; }
   #ed { background:transparent; color:transparent; caret-color:#cfd6e4; outline:none; resize:none; overflow:auto; }
   #ed::selection { background:rgba(90,130,220,.4); }
   .c-str { color:#ce9178; } .c-num { color:#b5cea8; } .c-bool { color:#569cd6; }
