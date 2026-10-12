@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>predict | Dashboard</title>
@@ -1716,14 +1719,42 @@ function renderCfgs() {
   const list = cfgStore();
   const el = document.getElementById("cfgList");
   if (!list.length) { el.innerHTML = '<div class="cfg-item">No saved configs.</div>'; return; }
-  el.innerHTML = list.map((c, i) =>
-    '<div class="cfg-item"><b>' + esc(c.name) + '</b><span class="acts">' +
-    '<span class="mini-btn" onclick="loadCfg(' + i + ')">LOAD</span>' +
-    '<span class="mini-btn edit" onclick="editCfg(' + i + ')">EDIT</span>' +
-    '<span class="mini-btn del" onclick="delCfg(' + i + ')">DELETE</span>' +
-    "</span></div>"
-  ).join("");
+  el.innerHTML = list.map(function (c) {
+    var nm = String(c.name).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    return '<div class="cfg-item" data-name="' + nm + '"><b>' + esc(c.name) + '</b><span class="acts">' +
+      '<span class="mini-btn" data-a="load">LOAD</span>' +
+      '<span class="mini-btn edit" data-a="edit">EDIT</span>' +
+      '<span class="mini-btn del" data-a="del">DELETE</span>' +
+      '</span></div>';
+  }).join("");
 }
+function cfgIndexByName(name) {
+  var list = cfgStore();
+  for (var i = 0; i < list.length; i++) if (list[i].name === name) return i;
+  return -1;
+}
+/* Resolve actions by the row's NAME (not a frozen index) so a stale list can
+   never delete/edit the wrong config. */
+(function () {
+  var cl = document.getElementById("cfgList");
+  if (!cl) return;
+  cl.addEventListener("click", function (e) {
+    var b = e.target && e.target.closest ? e.target.closest("[data-a]") : null;
+    if (!b || !this.contains(b)) return;
+    var row = b.closest(".cfg-item");
+    if (!row) return;
+    var i = cfgIndexByName(row.getAttribute("data-name"));
+    if (i < 0) { toast("Config not found"); renderCfgs(); return; }
+    var a = b.getAttribute("data-a");
+    if (a === "load") loadCfg(i);
+    else if (a === "edit") editCfg(i, row);
+    else if (a === "del") delCfg(i);
+  });
+})();
+/* Keep both lists fresh if another tab changes the config store. */
+window.addEventListener("storage", function (e) {
+  if (e.key === "predict_cfgs") { renderCfgs(); if (document.getElementById("cfgCardList")) renderCfgCard(); }
+});
 function saveCfg() {
   const name = document.getElementById("cfgName").value.trim();
   if (!name) { toast("Enter a config name"); return; }
@@ -1757,9 +1788,9 @@ function delCfg(i) {
   toast("Config deleted.");
 }
 
-function editCfg(i) {
+function editCfg(i, row) {
   const c = cfgStore()[i];
-  const row = document.getElementById("cfgList").children[i];
+  if (!row) row = document.getElementById("cfgList").children[i];
   if (!c || !row) return;
   row.innerHTML = '<input class="cfg-in cfg-edit" id="cfgEditIn" spellcheck="false">' +
     '<span class="acts">' +
