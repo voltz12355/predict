@@ -405,13 +405,6 @@ input[type=range].rng{width:150px;height:5px}
       <div class="card-h">SCRIPT</div>
       <button class="btn wide" style="margin-top:0" onclick="copyScript()">GET SCRIPT</button>
       <div class="hint">copies the full lua to your clipboard — paste into executor</div>
-      <div class="card-note">LICENSE KEY</div>
-      <div class="lic-row">
-        <input class="lic-in" type="password" id="lkey" value="PREDICT-PRO-2026" readonly>
-        <div class="ic" onclick="togKey()" title="show"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <div class="ic" onclick="cpyKey()" title="copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></div>
-      </div>
-      <button class="btn wide" onclick="copyPath()">COPY SCRIPT PATH</button>
     </div>
   </div>
   </div>
@@ -1814,13 +1807,6 @@ function fallbackCopy(t, msg) {
   ta.remove();
 }
 function copyScript() { copyText(SCRIPT_TEXT, "Copied to clipboard."); }
-function copyPath() { copyText("C:\\Users\\Pat\\Desktop\\predic.wtf\\predict_script.lua", "Copied to clipboard."); }
-function togKey() {
-  const k = document.getElementById("lkey");
-  k.type = k.type === "password" ? "text" : "password";
-}
-function cpyKey() { copyText(document.getElementById("lkey").value, "Key copied to clipboard"); }
-
 function showTab(name) {
   var pages = ["home", "dash", "control", "media", "config", "bugs", "updates"];
   for (var i = 0; i < pages.length; i++) {
